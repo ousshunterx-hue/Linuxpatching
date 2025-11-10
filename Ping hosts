@@ -1,0 +1,6 @@
+---
+- name: Basic Ping Test
+  hosts: all
+  tasks:
+    - name: Test connection to all hosts
+      ping:
