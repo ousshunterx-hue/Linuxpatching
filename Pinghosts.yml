@@ -1,6 +1,7 @@
 ---
 - name: Basic Ping Test
   hosts: all
+  gather_facts: false  # This saves 10-20 seconds!
   tasks:
     - name: Test connection to all hosts
       ping:
