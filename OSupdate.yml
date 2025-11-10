@@ -1,0 +1,23 @@
+---
+- name: Simple CentOS Stream 10 Update
+  hosts: all
+  become: yes
+  gather_facts: false
+
+  tasks:
+    - name: Update all packages using dnf
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+      register: update_result
+
+    - name: Show update result
+      debug:
+        msg: "System updated successfully on {{ inventory_hostname }}"
+      when: update_result.changed
+
+    - name: Show no changes message
+      debug:
+        msg: "No updates available for {{ inventory_hostname }}"
+      when: not update_result.changed
