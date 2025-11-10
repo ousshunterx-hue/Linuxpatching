@@ -1,0 +1,7 @@
+- name: Update apt cache on all hosts
+hosts: all
+become: true # Requires root (sudo) permissions
+tasks:
+- name: Run apt update (update cache)
+ansible.builtin.apt:
+update_cache: yes
