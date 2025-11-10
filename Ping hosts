@@ -4,3 +4,7 @@
   tasks:
     - name: Test connection to all hosts
       ping:
+
+    - name: Display success message
+      debug:
+        msg: "✅ Successfully connected to {{ inventory_hostname }}"
