@@ -1,0 +1,31 @@
+---
+- name: Check Current Package Status
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Check security updates only
+      shell: dnf --security check-update
+      register: security_updates
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Show security update status
+      debug:
+        msg: "{{ 'Security updates available' if security_updates.rc == 100 else 'No security updates available' }}"
+
+    - name: Get installed kernel version
+      shell: uname -r
+      register: kernel_version
+
+    - name: Show kernel version
+      debug:
+        msg: "Current kernel: {{ kernel_version.stdout }}"
+
+    - name: Check last boot time
+      shell: uptime -s
+      register: boot_time
+
+    - name: Show system uptime
+      debug:
+        msg: "System booted: {{ boot_time.stdout }}"
