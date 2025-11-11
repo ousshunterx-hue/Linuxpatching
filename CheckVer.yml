@@ -1,0 +1,14 @@
+---
+- name: Check CentOS OS Version and Kernel
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Display OS and Kernel information
+      debug:
+        msg: |
+          Hostname: {{ ansible_hostname }}
+          OS: {{ ansible_distribution }} {{ ansible_distribution_version }}
+          OS Major Version: {{ ansible_distribution_major_version }}
+          Kernel: {{ ansible_kernel }}
+          Architecture: {{ ansible_architecture }}
