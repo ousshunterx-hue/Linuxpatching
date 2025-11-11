@@ -1,0 +1,16 @@
+---
+- name: Update Packages on CentOS Stream
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update all packages to latest versions
+      dnf:
+        name: "*"
+        state: latest
+        update_cache: yes
+      register: update_result
+
+    - name: Show update results
+      debug:
+        msg: "{{ update_result.changed | ternary('Packages were updated', 'System is already up to date') }}"
